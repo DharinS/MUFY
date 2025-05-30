@@ -1,5 +1,17 @@
 import streamlit as st
-## Creating a Simple Streamlit Chatbot
+import pandas as pd
+import numpy as np
+import plotly.express as px
+# Set page title
+st.title("My First Streamlit App")
+
+# Add header
+st.header("Welcome to the dashboard")
+
+# Add text
+st.write("This is a simple demonstration of Streamlit capabilities")
+```python
+import streamlit as st
 
 def initialize_session_state():
     if "messages" not in st.session_state:
@@ -33,3 +45,27 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+```
+
+Run the application:
+
+```bash
+streamlit run chatbot.py
+```# Add sidebar
+st.sidebar.header("Filters")
+
+# Add dropdown
+selected_month = st.sidebar.selectbox(
+    "Select Month",
+    options=df['Month'].unique()
+)
+
+# Add slider
+price_range = st.sidebar.slider(
+    "Select Price Range",
+    min_value=0,
+    max_value=3000,
+    value=(0, 3000)
+)
+streamlit run app.py

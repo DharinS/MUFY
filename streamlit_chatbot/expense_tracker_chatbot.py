@@ -1,0 +1,150 @@
+import streamlit as st
+st.set_page_config(page_title="💰 Expense Tracker")
+import pandas as pd
+import datetime
+import os
+
+# File to store data
+DATA_FILE = "expenses.csv"
+
+# Initialize data file if it doesn't exist
+if not os.path.exists(DATA_FILE):
+    df = pd.DataFrame(columns=["Date", "Category", "Description", "Amount"])
+    df.to_csv(DATA_FILE, index=False)
+
+# Load data
+def load_data():
+    return pd.read_csv(DATA_FILE)
+
+# Save new expense
+def add_expense(date, category, description, amount):
+    new_row = pd.DataFrame([[date, category, description, amount]],
+                           columns=["Date", "Category", "Description", "Amount"])
+    df = load_data()
+    df = pd.concat([df, new_row], ignore_index=True)
+    df.to_csv(DATA_FILE, index=False)
+
+# UI
+
+st.title("💰 Expense Tracker")
+
+# Form to input new expense
+with st.form("expense_form"):
+    st.subheader("Add a New Expense")
+    date = st.date_input("Date", datetime.date.today())
+    category = st.selectbox("Category", ["Food", "Transport", "Shopping", "Bills", "Entertainment", "Other"])
+    description = st.text_input("Description")
+    amount = st.number_input("Amount", min_value=0.0, format="%.2f")
+    submitted = st.form_submit_button("Add Expense")
+
+    if submitted:
+        add_expense(date, category, description, amount)
+        st.success("Expense added successfully!")
+
+# Display existing data
+df = load_data()
+st.subheader("📊 Expense History")
+st.dataframe(df)
+
+# Summary
+total = df["Amount"].sum()
+by_category = df.groupby("Category")["Amount"].sum()
+
+st.subheader("📈 Summary")
+st.markdown(f"**Total Expenses:** ${total:.2f}")
+st.bar_chart(by_category)
+
+# Optional: Filter by date or category
+with st.expander("🔍 Filter View"):
+    start_date = st.date_input("Start Date", df["Date"].min() if not df.empty else datetime.date.today())
+    end_date = st.date_input("End Date", df["Date"].max() if not df.empty else datetime.date.today())
+    selected_category = st.multiselect("Filter by Category", df["Category"].unique())
+
+    filtered_df = df.copy()
+    filtered_df["Date"] = pd.to_datetime(filtered_df["Date"])
+    filtered_df = filtered_df[(filtered_df["Date"] >= pd.to_datetime(start_date)) &
+                              (filtered_df["Date"] <= pd.to_datetime(end_date))]
+
+    if selected_category:
+        filtered_df = filtered_df[filtered_df["Category"].isin(selected_category)]
+
+    st.write("Filtered Results:")
+    st.dataframe(filtered_df)
+    st.markdown(f"**Filtered Total:** ${filtered_df['Amount'].sum():.2f}")
+import streamlit as st
+import pandas as pd
+import datetime
+import os
+
+# File to store data
+DATA_FILE = "expenses.csv"
+
+# Initialize data file if it doesn't exist
+if not os.path.isfile(DATA_FILE):
+    df = pd.DataFrame(columns=["Date", "Category", "Description", "Amount"])
+    df.to_csv(DATA_FILE, index=False)
+
+# Load data
+def load_data():
+    return pd.read_csv(DATA_FILE)
+
+# Save new expense
+def add_expense(date, category, description, amount):
+    new_row = pd.DataFrame([[date, category, description, amount]],
+                           columns=["Date", "Category", "Description", "Amount"])
+    df = load_data()
+    df = pd.concat([df, new_row], ignore_index=True)
+    df.to_csv(DATA_FILE, index=False)
+
+# UI
+st.set_page_config(page_title="💰 Expense Tracker")
+st.title("💰 Expense Tracker")
+
+# Form to input new expense
+with st.form("expense_form"):
+    st.subheader("Add a New Expense")
+    date = st.date_input("Date", datetime.date.today())
+    category = st.selectbox("Category", ["Food", "Transport", "Shopping", "Bills", "Entertainment", "Other"])
+    description = st.text_input("Description")
+    amount = st.number_input("Amount", min_value=0.0, format="%.2f")
+    submitted = st.form_submit_button("Add Expense")
+
+    if submitted:
+        add_expense(date, category, description, amount)
+        st.success("Expense added successfully!")
+
+# Display existing data
+df = load_data()
+st.subheader("📊 Expense History")
+
+# Ensure 'Date' is treated properly
+if not df.empty:
+    df['Date'] = pd.to_datetime(df['Date']).dt.date
+    st.dataframe(df)
+
+    # Summary
+    total = df["Amount"].sum()
+    by_category = df.groupby("Category")["Amount"].sum()
+
+    st.subheader("📈 Summary")
+    st.markdown(f"**Total Expenses:** ${total:.2f}")
+    st.bar_chart(by_category)
+
+    # Optional: Filter by date or category
+    with st.expander("🔍 Filter View"):
+        start_date = st.date_input("Start Date", df["Date"].min())
+        end_date = st.date_input("End Date", df["Date"].max())
+        selected_category = st.multiselect("Filter by Category", df["Category"].unique())
+
+        filtered_df = df.copy()
+        filtered_df = filtered_df[(filtered_df["Date"] >= start_date) &
+                                  (filtered_df["Date"] <= end_date)]
+
+        if selected_category:
+            filtered_df = filtered_df[filtered_df["Category"].isin(selected_category)]
+
+        st.write("Filtered Results:")
+        st.dataframe(filtered_df)
+        st.markdown(f"**Filtered Total:** ${filtered_df['120000'].sum():.2f}")
+else:
+    st.info("No expenses recorded yet. Use the form above to add some.")

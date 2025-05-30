@@ -1,0 +1,22 @@
+{
+    "restaurants": {
+        "Pizza Place": {
+            "rating_sum": 2,
+            "rating_count": 2
+        }
+    },
+    "drivers": {
+        "jj2": {
+            "rating_sum": 1,
+            "rating_count": 1,
+            "speed_sum": 1,
+            "service_sum": 1
+        },
+        "dr1": {
+            "rating_sum": 1,
+            "rating_count": 1,
+            "speed_sum": 5,
+            "service_sum": 5
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "jj": {
+        "password": "$2b$12$3oO.fORYsPleG65REWxDzujQGBQll6hsJ2z7Im5PQlLnuFsNkx03K",
+        "phone": "10248210",
+        "role": "Customer"
+    },
+    "jj2": {
+        "password": "$2b$12$mFtKrKLbh6Rbnwwc4BMw6OOMdnBJchtKBtA0Gx2A2U8aBPmUx82..",
+        "phone": "4637382",
+        "role": "Driver"
+    },
+    "jj3": {
+        "password": "$2b$12$S4H4kZrJ.fZBxcs./RuB6uqaMVPPdY80hyTtTRIYqUAh8P6vSKTU2",
+        "phone": "343844",
+        "role": "Customer"
+    },
+    "jj4": {
+        "password": "$2b$12$NL2ofvJWhlLQTgWx13OBnOgfAXLhKHq9PldCCDliyhGvmcKliFmCa",
+        "phone": "89076",
+        "role": "Customer"
+    },
+    "gh6": {
+        "password": "$2b$12$OaDUzlbTu.waeYaOg4rUsOoUsYDA1DiyruxsIcCPHyThaDq5yj1lG",
+        "phone": "574748",
+        "role": "Driver"
+    },
+    "jj6": {
+        "password": "$2b$12$EFXeL4doGdWpfXfJqBPlBOJ5O9ZeCJJv4AnXCP2Va56igCNyNMnxW",
+        "phone": "53853838",
+        "role": "Driver"
+    },
+    "peter": {
+        "password": "$2b$12$r.Zvxrx.Cyp28x4yGIOsbuoXIvWMJNATAF0ooeO6SSlIqHMnGvioW",
+        "phone": "0193847",
+        "role": "Customer"
+    },
+    "gg1": {
+        "password": "$2b$12$eqQutm/2CyXhvxVeicsCrO4cmc9EVjiLz7Kx0MBp6FtZ1GYQn.eue",
+        "phone": "493891341",
+        "role": "Customer"
+    },
+    "dr1": {
+        "password": "$2b$12$jjq5VxHkHu6Lq1TLVIZg4.FNo5Tr0t8CZK68BMk3uh3CYqXdXwTee",
+        "phone": "46867808",
+        "role": "Driver"
+    }
+}
